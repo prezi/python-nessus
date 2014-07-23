@@ -177,3 +177,11 @@ class NessusConnection(object):
                 break
 
             fp.write(data)
+
+    def delete_report(self, report_name):
+        if not self._authenticated:
+            self._authenticate()
+
+        url = self._url + "/report/delete"
+        params = dict(report=report_name)
+        reply = self._get_reply(url, params)
